@@ -1,0 +1,53 @@
+.index {
+    display: flex;
+}
+
+.index .left,
+.index .right {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.index .Mui-selected {
+    border-radius: 25px 25px 0px 0px;
+border: #55D9C0 5px solid;
+    background: #55D9C0 !important;
+}
+.index .MuiTabs-indicator {
+    background: #55D9C0 !important;
+}
+
+.index .watchBudget, .index .subsmanage{
+    margin: 2%;
+    width: 50%;
+    font-size: 1.2em;
+    color: white;
+}
+
+.index .tabs{
+border-radius: 25px 25px 0px 0px;
+margin: 1% 1% 0 1%;
+border: #55D9C0 2px solid;
+}
+
+.index h1{
+    width: 100%;
+    padding-bottom: 0.7%;
+    margin-bottom: 0;
+}
+.index .leftcontent{
+    display: flex;
+    flex-direction: column;
+    align-items: center ;
+    width: 100%;
+    border-right: solid #55D9C0 3px;
+    border-top: solid #55D9C0 1px;
+}
+.index a {
+    color: white;
+    text-decoration: none;
+    width: 100%;
+}

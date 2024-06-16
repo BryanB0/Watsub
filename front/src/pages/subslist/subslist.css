@@ -1,0 +1,20 @@
+.subslist{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 5% 25%;
+
+}
+
+.subslist .substitle{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2%;
+
+}
+
+.subslist button{
+    color: white;
+    width: 80%;
+    margin: 2% 10%;
+}

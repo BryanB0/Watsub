@@ -1,0 +1,92 @@
+.register {
+    display: flex;
+}
+
+.register .left,
+.register .right {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.register .left {
+    border-right: solid #55D9C0 1.5px;
+}
+
+.register .right {
+    border-left: solid #55D9C0 1.5px;
+}
+
+.register h1 {
+    font-size: 3em;
+    text-decoration: underline;
+}
+
+.register .left p {
+    font-size: 2.0em;
+}
+.register .welcome {
+    font-size: 2.5em;
+}
+
+.register .form {
+    width: 75%;
+}
+
+.register .form-element {
+    display: flex;
+    justify-content: space-between;
+}
+.register button {
+    margin-bottom: 10px;
+    width: 100%;
+    font-size: 1.2em;
+    border-radius: 25px;
+    color: white;
+}
+
+.register .euro-symb {
+    font-size: 1.5em;
+    color: #fff;
+}
+
+.register a {
+    color: white;
+    text-decoration: none;
+}
+
+.register .form-elements{
+    background-color: #ffffff54;
+    padding: 2%;
+    margin: 2% 0;
+    border-radius: 15px;
+}
+
+.register .label{
+    color: white;
+    font-size: 1.5em;
+    display: flex;
+    padding-right: 2%;
+}
+
+.register .app-name{
+    color: #55D9C0;
+}
+
+.register input::placeholder {
+    opacity: 1;
+    color: white;
+
+  }
+.register input {
+   text-align: end;
+   font-size: 1.2em;
+   color: #fff;
+
+  }
+  .register hr{
+    opacity: 0.5;
+  }

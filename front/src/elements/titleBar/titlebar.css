@@ -1,0 +1,9 @@
+.titlebar{
+    background-color: #02231C;
+    color : #55D9C0;
+    font-size: 3em;
+    text-align: center;
+    padding: 0.5% 0;
+    border-bottom: solid #55D9C0 3px;
+    
+}

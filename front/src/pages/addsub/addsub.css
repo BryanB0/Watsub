@@ -1,0 +1,94 @@
+.addsub{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+}
+
+.addsub .form {
+    width: 75%;
+}
+
+.addsub .form-element {
+    display: flex;
+    justify-content: space-between;
+}
+
+.addsub .buttons{
+display: flex;
+justify-content: space-around;
+}
+.addsub button {
+    font-size: 1.5em;
+    border-radius: 15px;
+    color: white;
+}
+
+.addsub a {
+    color: white;
+    text-decoration: none;
+}
+
+.addsub .form-elements{
+    background-color: #ffffff54;
+    padding: 2%;
+    margin: 2% 0;
+    border-radius: 15px;
+}
+
+.addsub .label{
+    color: white;
+    font-size: 1.5em;
+    display: flex;
+    align-items: center;
+}
+
+.addsub input::placeholder {
+    opacity: 1;
+    color: black;
+
+  }
+  .addsub input {
+   font-size: 1.2em;
+   border-radius: 5px;
+
+  }
+
+  .addsub hr{
+    opacity: 0.5;
+  }
+
+  .addsub h1{
+    width: 75%;
+    margin-right: auto;
+    margin-left: 12.5%;
+
+  }
+
+  .addsubdialog .dialogButton{
+    display: flex;
+    justify-content: space-around;
+    
+  }
+  
+  .addsubdialog .dialogButton button{
+    margin: 0% 0 7% 0;
+    border-radius: 15px;
+    font-size: 1.2em;
+  }
+
+  .addsubdialog input::placeholder {
+    opacity: 1;
+    
+}
+.addsubdialog input {
+    display: flex;
+    color: #929292;
+    background-color: #d9d9d9;
+    border-radius: 25px;
+  }
+
+  .addsubdialog .colorPicker{
+    width: 100%;
+  }

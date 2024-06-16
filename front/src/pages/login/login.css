@@ -1,0 +1,66 @@
+.login {
+    display: flex;
+}
+
+.login .left,
+.login .right {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+}
+
+.login .left {
+    border-right: solid #55D9C0 1.5px;
+}
+
+.login .right {
+    border-left: solid #55D9C0 1.5px;
+}
+
+.login h1 {
+    font-size: 3em;
+    text-decoration: underline;
+}
+
+.login p {
+    font-size: 2.0em;
+}
+
+.login .right form {
+    text-align: center;
+    /* Centrer les éléments du formulaire */
+}
+
+.login input,
+.login button {
+    display: block;
+    margin-bottom: 10px;
+    width: 100%;
+    font-size: 1.5em;
+}
+
+.login a  {
+    color: white;
+    text-decoration: none;
+}
+
+.login button {
+    margin-bottom: 10px;
+    width: 100%;
+    font-size: 1.2em;
+    border-radius: 25px;
+    color: white;
+}
+
+.login .form {
+    width: 60%;
+}
+
+.login input::placeholder {
+    opacity: 1;
+
+  }

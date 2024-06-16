@@ -1,0 +1,96 @@
+.user{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user .form {
+    width: 75%;
+}
+
+.user .form-element {
+    display: flex;
+    justify-content: space-between;
+}
+.user button {
+    font-size: 1.6em;
+    border-radius: 15px;
+    color: white;
+}
+
+.user .buttons{
+    display: flex;
+    justify-content: space-around;
+}
+
+.user .passButton{
+    color: #000;
+    font-size: 1em;
+    border-radius: 25px;
+}
+.user .euro-symb {
+    font-size: 1.5em;
+}
+
+.user .form-elements{
+    background-color: #ffffff54;
+    padding: 2%;
+    margin: 2% 0;
+    border-radius: 15px;
+}
+
+.user .label{
+    color: white;
+    font-size: 1.5em;
+    display: flex;
+    padding-right: 2%;
+}
+
+.user .app-name{
+    color: #55D9C0;
+}
+
+.user input::placeholder {
+    opacity: 1;
+
+  }
+.user input {
+   text-align: end;
+   font-size: 1.2em;
+
+  }
+  .user hr{
+    opacity: 0.5;
+  }
+
+  .userdialog .dialogButton{
+    display: flex;
+    justify-content: space-around;
+    
+  }
+  .userdialog .dialogButton button{
+    width: 40%;
+    margin: 7% 0 0% 0;
+    border-radius: 25px;
+    padding: 3%;
+    font-size: 1.3em;
+  }
+
+
+.userdialog  input {
+    display: flex;
+    color: #929292;
+    background-color: #d9d9d9;
+    border-radius: 25px;
+  }
+
+  .userdialog .useritems{
+    display: flex;
+    flex-direction: column;
+  }
+  .userdialog .useritem{
+    display: flex;
+    flex-direction: column;
+    margin: 5% 0;
+    width: 80%;
+  }
