@@ -38,8 +38,6 @@ router.post(
         date_fin_engagement,
         IsEngagement,
         id_categorie,
-        nom_categorie,
-        couleur,
         id_sous_categorie,
         nom_sous_categorie,
         couleur_sous_categorie,
@@ -60,7 +58,7 @@ router.post(
         });
       }
 
-      const validFrequences = ["semaine", "mois", "annee"];
+      const validFrequences = ["Hebdomadaire", "Bimensuel", "Mensuel", "Trimestriel", "Annuel"];
       if (
         !frequence_prelevement ||
         typeof frequence_prelevement !== "string" ||
@@ -69,7 +67,7 @@ router.post(
         return res.status(400).json({
           success: false,
           message:
-            "La fréquence de prélèvement est requise, doit être une chaîne de caractères et doit être 'semaine', 'mois' ou 'annee'.",
+            "La fréquence de prélèvement est requise, doit être une chaîne de caractères et doit être 'Hebdomadaire', 'Bimensuel', 'Mensuel', 'Trimestriel' ou 'Annuel'.",
         });
       }
 
@@ -118,22 +116,6 @@ if (!id_categorie || typeof id_categorie !== "number") {
         });
       }
 
-      if (!nom_categorie || typeof nom_categorie !== "string") {
-        return res.status(400).json({
-          success: false,
-          message:
-            "Le nom de catégorie d abonnement est requis et doit être une chaine de caractere.",
-        });
-      }
-
-      if (!couleur || typeof couleur !== "string") {
-        return res.status(400).json({
-          success: false,
-          message:
-            "Le couleur de catégorie d abonnement est requis et doit être une chaine de caractere.",
-        });
-      }
-
       if (!id_sous_categorie || typeof id_sous_categorie !== "number") {
         return res.status(400).json({
           success: false,
@@ -141,24 +123,6 @@ if (!id_categorie || typeof id_categorie !== "number") {
         });
       }
 
-      if (!nom_sous_categorie || typeof nom_sous_categorie !== "string") {
-        return res.status(400).json({
-          success: false,
-          message:
-            "Le nom de sous catégorie d abonnement est requis et doit être une chaine de caractere.",
-        });
-      }
-
-      if (
-        !couleur_sous_categorie ||
-        typeof couleur_sous_categorie !== "string"
-      ) {
-        return res.status(400).json({
-          success: false,
-          message:
-            "Le couleur de sous catégorie d abonnement est requis et doit être une chaine de caractere.",
-        });
-      }
       await controller.insertAbonnement(
         nom_fournisseur,
         montant,
@@ -171,8 +135,6 @@ if (!id_categorie || typeof id_categorie !== "number") {
           : undefined, // Transformation conditionnelle des dates
         IsEngagement,
         id_categorie,
-        nom_categorie,
-        couleur,
         id_sous_categorie,
         nom_sous_categorie,
         couleur_sous_categorie

@@ -28,7 +28,7 @@ router.get(
   }
 );
 // Route pour créer un nouvel categorie.
-router.post(
+/*router.post(
   "/create_categorie",
   async (req, res) => {
     try {
@@ -67,7 +67,7 @@ router.post(
         .send("Erreur lors de l'insertion de la catégorie.");
     }
   }
-);
+);*/
 
 // Route pour supprimer l'utilisateur
 router.delete(

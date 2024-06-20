@@ -39,14 +39,19 @@ function Subslist() {
                                         aria-controls="panel1-content"
                                         id="panel1-header"
                                     >
-                                        <AiOutlineHome /> Habitation <span>date</span>
+                                        <AiOutlineHome /> Habitation <div>&nbsp;date</div>
                                     </AccordionSummary>
                                     <AccordionDetails>
-                                        Habitation1
+                                        fournisseur :
                                     </AccordionDetails>
                                     <AccordionDetails>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                        malesuada lacus ex, sit amet blandit leo lobortis eget.
+                                        fréquence de prélevement :
+                                    </AccordionDetails>
+                                    <AccordionDetails>
+                                        echéance :
+                                    </AccordionDetails>
+                                    <AccordionDetails>
+                                        engagement :
                                     </AccordionDetails>
                                 </Accordion>
                             </div>
@@ -59,11 +64,19 @@ function Subslist() {
                                         aria-controls="panel2-content"
                                         id="panel2-header"
                                     >
-                                        <SlEnergy /> Energie
+                                        <SlEnergy /> Energie<div>&nbsp;date</div>
                                     </AccordionSummary>
                                     <AccordionDetails>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                        malesuada lacus ex, sit amet blandit leo lobortis eget.
+                                        fournisseur :
+                                    </AccordionDetails>
+                                    <AccordionDetails>
+                                        fréquence de prélevement :
+                                    </AccordionDetails>
+                                    <AccordionDetails>
+                                        echéance :
+                                    </AccordionDetails>
+                                    <AccordionDetails>
+                                        engagement :
                                     </AccordionDetails>
                                 </Accordion>
                             </div>
@@ -76,11 +89,19 @@ function Subslist() {
                                         aria-controls="panel2-content"
                                         id="panel2-header"
                                     >
-                                        <AiFillCar /> Transport
+                                        <AiFillCar /> Transport<div>&nbsp;date</div>
                                     </AccordionSummary>
                                     <AccordionDetails>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                        malesuada lacus ex, sit amet blandit leo lobortis eget.
+                                        fournisseur :
+                                    </AccordionDetails>
+                                    <AccordionDetails>
+                                        fréquence de prélevement :
+                                    </AccordionDetails>
+                                    <AccordionDetails>
+                                        echéance :
+                                    </AccordionDetails>
+                                    <AccordionDetails>
+                                        engagement :
                                     </AccordionDetails>
                                 </Accordion>
                             </div>

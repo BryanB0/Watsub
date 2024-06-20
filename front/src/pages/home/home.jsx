@@ -51,6 +51,7 @@ useEffect(() => {
 }, []);
 
     const depenses = 521
+    const salaire = 1500
 
     return (
         <>
@@ -84,7 +85,7 @@ useEffect(() => {
                                     slotProps={{ legend: { hidden: true } }}
                                 />
                                 
-                                <p>Budget Restant : {user.salaire-depenses}€</p>
+                                <p>Budget Restant : {salaire-depenses}€</p>
                             </div>
                         </div>
                         <div className='right'>

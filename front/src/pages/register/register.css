@@ -90,3 +90,26 @@
   .register hr{
     opacity: 0.5;
   }
+
+  @media (max-width :800px){
+    .register{
+        flex-direction: column;
+        margin: 0 2%;
+
+    }
+    .register p{
+        font-size:1.5em
+    }
+    .register .left, 
+    .register .right {
+        width: 100%;
+    }
+
+    .register .left {
+        border-right: none;
+    }
+    
+    .register .right {
+        border-left: none;
+    }
+  }

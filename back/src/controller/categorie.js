@@ -24,34 +24,7 @@ export class CategorieController {
       );
     }
   }
-async insertCategorie(nom_categorie, couleur_categorie) {
-    try {
-      const existingCategorie = await connexion.executeQuery(
-        "SELECT 1 FROM categorie WHERE nom_categorie = ? LIMIT 1",
-        [nom_categorie]
-      );
 
-      if (existingCategorie.length > 0) {
-        throw new Error("la nom de la categorie existe déjà.");
-      }
-      // Définition de la requête SQL pour insérer une nouvelle categorie
-      const query = `
-      INSERT INTO categorie (
-        nom_categorie,
-        couleur_categorie
-      )
-      VALUES (?, ?)
-    `;
-
-      // Exécution de la requête
-      await connexion.executeQuery(query, [nom_categorie, couleur_categorie]);
-    } catch (error) {
-      // Renvoyer une nouvelle erreur avec le message personnalisé
-      throw new Error(
-        "Erreur lors de l'insertion de la categorie : " + error.message
-      );
-    }
-  }
 async deleteCategorie(nom_categorie) {
     try {
       // Vérifier d'abord si la categorie existe

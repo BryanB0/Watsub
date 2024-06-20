@@ -19,10 +19,7 @@ function Accordions() {
           >
             <AiOutlineHome /> Habitation
           </AccordionSummary>
-          <AccordionDetails>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </AccordionDetails>
+          
         </Accordion>
       </div>
       <div>
@@ -36,10 +33,6 @@ function Accordions() {
           >
             <SlEnergy /> Energie
           </AccordionSummary>
-          <AccordionDetails>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </AccordionDetails>
         </Accordion>
         </div>
         <div>
@@ -53,10 +46,6 @@ function Accordions() {
           >
             <AiFillCar /> Transport
           </AccordionSummary>
-          <AccordionDetails>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </AccordionDetails>
         </Accordion>
       </div>
     </div>

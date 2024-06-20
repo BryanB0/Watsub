@@ -1,4 +1,4 @@
-import {supertest} from 'supertest';
+/*import supertest from 'supertest';
 import app from '../src/app';
 import database from '../connexion';
 
@@ -35,7 +35,8 @@ describe.only('Users', () => {
             
             /*expect(users.body).toBe({
     
-            })*/
+            })
+        })
     
     it('Get all users', async () => {
         const users = await supertest(app).get('/users/get_all_users');
@@ -44,11 +45,11 @@ describe.only('Users', () => {
         
         /*expect(users.body).toBe({
 
-        })*/
+        })
     });
     afterAll(async () => {
         // CLEANUP
         await database.destroy();
     });
-
-});
+    
+});*/

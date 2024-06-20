@@ -16,11 +16,6 @@ const theme = createTheme({
     },
 });
 
-const subcategories = [
-    { id: 1, name: "Elec", color: "#FFF1A6" },
-    { id: 2, name: "Gaz", color: "#FFF1A6" },
-];
-
 const textFieldStyle = {
     width: '50%',
     '& .MuiSvgIcon-root': {
@@ -30,14 +25,15 @@ const textFieldStyle = {
         backgroundColor: '#ffffff80',
     },
     "& fieldset": { border: 'none' },
-}
+};
+
 const textFieldCate = {
     width: '50%',
     '& .MuiSvgIcon-root': {
         color: 'white',
     },
     "& fieldset": { border: 'none' },
-}
+};
 
 function SimpleDialog(props) {
     const { onClose, selectedValue, open } = props;
@@ -47,8 +43,26 @@ function SimpleDialog(props) {
         onClose(selectedValue);
     };
 
-    const handleListItemClick = () => {
+    const [colorFormValues, colorSetFormValues] = useState({
+        nom_sous_categorie: '', couleur_sous_categorie: color
+    });
+
+    const handleListItemClick = (e) => {
+        e.preventDefault();
+        fetch('http://localhost:3000/sous_categorie/create_sous_categorie', {
+            method: 'POST', 
+            body: JSON.stringify(colorFormValues),
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
         onClose(colorFormValues);
+        window.location.reload(); 
     };
 
     const handleChangeColor = (e) => {
@@ -56,10 +70,6 @@ function SimpleDialog(props) {
         setColor(value);
         colorSetFormValues(prev => ({ ...prev, [name]: value }));
     };
-
-    const [colorFormValues, colorSetFormValues] = useState({
-        subname: '', subhex: color
-    });
 
     return (
         <FormGroup>
@@ -75,7 +85,7 @@ function SimpleDialog(props) {
                     <DialogTitle sx={{ textAlign: 'center' }}>Nouvelle sous catégorie</DialogTitle>
                     <List>
                         <ListItem>
-                            <TextField value={colorFormValues.subname} onChange={handleChangeColor} name='subname' fullWidth sx={{
+                            <TextField value={colorFormValues.nom_sous_categorie} onChange={handleChangeColor} name='nom_sous_categorie' fullWidth sx={{
                                 '& .MuiOutlinedInput-root': {
                                     '& fieldset': {
                                         borderColor: 'white',
@@ -88,7 +98,7 @@ function SimpleDialog(props) {
                             }} size='small' variant="outlined" placeholder='Nom'></TextField>
                         </ListItem>
                         <ListItem>
-                            <input value={colorFormValues.subhex} onChange={handleChangeColor} name='subhex' type="color" className="colorPicker" />
+                            <input value={colorFormValues.couleur_sous_categorie} onChange={handleChangeColor} name='couleur_sous_categorie' type="color" className="colorPicker" />
                         </ListItem>
                     </List>
                     <div className='dialogButton'>
@@ -107,39 +117,49 @@ SimpleDialog.propTypes = {
 };
 
 function Addsub() {
-
     const [categories, setCategories] = useState([]);
+    const [selectedCategoryColor, setSelectedCategoryColor] = useState('#ffffff80');
+    const [subcategories, setsubCategories] = useState([]);
+    const [selectedSubcategoryColor, setSelectedSubcategoryColor] = useState('#ffffff80');
+    const [formValues, setFormValues] = useState({
+        id_categorie: '',
+        id_sous_categorie: '',
+        nom_fournisseur: '',
+        montant: '',
+        frequence_prelevement: '',
+        date_echeance: '',
+        IsEngagement: false,
+        date_fin_engagement: ''
+    });
+    const [open, setOpen] = useState(false);
+    const [selectedValue, setSelectedValue] = useState();
 
     useEffect(() => {
         fetch('http://localhost:3000/categorie/get_all_categorie')
             .then(response => response.json())
             .then(data => {
                 setCategories(data);
-                //console.log(data);
             })
             .catch((error) => {
                 console.error(error);
             });
     }, []);
 
-    const [formValues, setFormValues] = useState({
-        id_categorie: '',
-        subcategory: { subname: '', subhex: '' },
-        nom_fournisseur: '',
-        montant: '',
-        frequence_prelevement: '',
-        echeance: '',
-        IsEngagement: false,
-        date_fin_engagement: ''
-    });
-
-
-    const [open, setOpen] = useState(false);
-    const [selectedValue, setSelectedValue] = useState();
+    useEffect(() => {
+        fetch('http://localhost:3000/sous_categorie/get_all_sous_categorie')
+            .then(response => response.json())
+            .then(data => {
+                setsubCategories(data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }, []);
 
     const montantInt = parseInt(formValues.montant, 10);
     const id_categorieInt = parseInt(formValues.id_categorie, 10);
-    const updatedFormValues = { ...formValues, montant: montantInt, id_categorie: id_categorieInt };
+    const id_sous_categorieInt = parseInt(formValues.id_sous_categorie, 10);
+    const updatedFormValues = { ...formValues, montant: montantInt, id_categorie: id_categorieInt, id_sous_categorie : id_sous_categorieInt };
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -147,10 +167,33 @@ function Addsub() {
             ...prev,
             [name]: type === 'checkbox' ? checked : value,
         }));
+
+        if (name === 'id_categorie') {
+            const selectedCategory = categories.find(option => option.id_category === parseInt(value));
+            setSelectedCategoryColor(selectedCategory ? selectedCategory.couleur_category : '#ffffff80');
+        }
+
+        if (name === 'id_sous_categorie') {
+            const selectedSubcategory = subcategories.find(option => option.id_sous_categorie === parseInt(value));
+            setSelectedSubcategoryColor(selectedSubcategory ? selectedSubcategory.couleur_sous_categorie : '#ffffff80');
+        }
     };
 
-    const handleFormSubmit = () => {
+    const handleFormSubmit = (e) => {
         console.log(updatedFormValues);
+        e.preventDefault();
+        fetch('http://localhost:3000/abonnement/create_abonnement', {
+            method: 'POST', 
+            body: JSON.stringify(updatedFormValues),
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
     };
 
     const handleClickOpen = () => {
@@ -159,7 +202,7 @@ function Addsub() {
 
     const handleClose = (value) => {
         setOpen(false);
-        if (value && value.subname) {
+        if (value && value.nom_sous_categorie) {
             setFormValues(prev => ({
                 ...prev,
                 subcategory: value
@@ -167,12 +210,6 @@ function Addsub() {
         }
         setSelectedValue(value);
     };
-
-    const selectedCategoryOption = categories.find(option => option.id_category === (updatedFormValues.id_categorie));
-    const selectedCategoryColor = selectedCategoryOption ? selectedCategoryOption.couleur_category : '#ffffff80';
-
-    const selectedSubcategoryOption = subcategories.find(option => option.name === formValues.subcategory.subname);
-    const selectedSubcategoryColor = selectedSubcategoryOption ? selectedSubcategoryOption.color : (formValues.subcategory.subhex || '#ffffff80');
 
     return (
         <>
@@ -206,13 +243,13 @@ function Addsub() {
                                 <hr />
 
                                 <div className='form-element'>
-                                    <InputLabel className='label' htmlFor="subcategory">Sous Catégorie :</InputLabel>
+                                    <InputLabel className='label' htmlFor="id_sous_categorie">Sous Catégorie :</InputLabel>
                                     <TextField
                                         color="secondary" focused
-                                        id="subcategory"
-                                        className='subcategory'
+                                        id="id_sous_categorie"
+                                        className='id_sous_categorie'
                                         select
-                                        value={formValues.subcategory.subname}
+                                        value={formValues.id_sous_categorie}
                                         sx={[textFieldCate, { backgroundColor: selectedSubcategoryColor }]}
                                         SelectProps={{
                                             native: true,
@@ -220,86 +257,80 @@ function Addsub() {
                                                 if (event.target.value === "newcategory") {
                                                     handleClickOpen();
                                                 } else {
-                                                    const selectedSubcategory = subcategories.find(option => option.name === event.target.value);
+                                                    const selectedSubcategory = subcategories.find(option => option.id_sous_categorie === parseInt(event.target.value));
                                                     setFormValues(prev => ({
                                                         ...prev,
-                                                        subcategory: selectedSubcategory
+                                                        id_sous_categorie: event.target.value,
+                                                        colorFormValues: selectedSubcategory
                                                     }));
                                                 }
                                             }
                                         }}
                                     >
                                         <option value="" />
-                                        {subcategories.map((option) => (
-
-                                            <option style={{ backgroundColor: option.color }} key={option.id} value={option.name}>
-                                                {option.name}
-                                            </option>
-                                        ))}
-                                        <option value="newcategory">Ajouter une sous catégorie ...</option>
-
-                                        {formValues.subcategory.subname && (
-                                            <option style={{ backgroundColor: formValues.subcategory.subhex }} value={formValues.subcategory.subname}>
-                                                {formValues.subcategory.subname}
-                                            </option>
-                                        )}
-                                    </TextField>
-                                </div>
-                                <hr />
-                                <div className='form-element'>
-                                    <InputLabel className='label' htmlFor="nom_fournisseur">Fournisseur :</InputLabel>
-                                    <TextField value={formValues.nom_fournisseur} onChange={handleChange} sx={textFieldStyle} name="nom_fournisseur" id="nom_fournisseur" ></TextField>
-                                </div>
-                                <hr />
-                                <div className='form-element'>
-                                    <InputLabel className='label' htmlFor="montant">Prix :</InputLabel>
-                                    <TextField value={formValues.montant} onChange={handleChange} type='number' sx={textFieldStyle} name="montant" id="montant" ></TextField>
-                                </div>
-                                <hr />
-                                <div className='form-element'>
-                                    <InputLabel className='label' htmlFor="frequence_prelevement">Fréquence :</InputLabel>
-                                    <TextField value={formValues.frequence_prelevement} onChange={handleChange}
-                                        color="secondary" focused
-                                        id="frequence_prelevement"
-                                        name='frequence_prelevement'
-                                        select
-                                        sx={textFieldStyle}
-                                        SelectProps={{
-                                            native: true,
-                                        }}
-                                    >
-                                        <option value=""></option>
-                                        <option value="Hebdomadaire">Hebdomadaire</option>
-                                        <option value="Bimensuel">Bimensuel</option>
-                                        <option value="Mensuel">Mensuel</option>
-                                        <option value="Trimestriel">Trimestriel</option>
-                                        <option value="Annuel">Annuel</option>
-                                    </TextField>
-                                </div>
-                                <hr />
-                                <div className='form-element'>
-                                    <InputLabel className='label' htmlFor="date_echeance">Échéance :</InputLabel>
-                                    <TextField type='date' value={formValues.date_echeance} onChange={handleChange} sx={textFieldStyle} name="date_echeance" id="date_echeance" ></TextField>
-                                </div>
-                                <hr />
-                                <div className='form-element'>
-                                    <InputLabel className='label' htmlFor="IsEngagement">Engagement :</InputLabel>
-                                    <Checkbox checked={formValues.IsEngagement} onChange={handleChange} name="IsEngagement" id="IsEngagement" />
-                                    <TextField type='date' value={formValues.date_fin_engagement} disabled={!formValues.IsEngagement} onChange={handleChange} sx={textFieldStyle} name="date_fin_engagement" id="date_fin_engagement" ></TextField>
-                                </div>
-                                <hr />
-                                <div className='buttons'>
-                                    <Button variant="contained" color='primary' onClick={handleFormSubmit}>Sauvegarder</Button>
-                                    <Link to='/subslist'><Button variant="contained" color='error'>Annuler</Button></Link>
-                                </div>
+                                        {subcategories.map((option, key) => (
+                                            <option style={{ backgroundColor: option.couleur_sous_categorie }} key={key} value={option.id_sous_categorie}>
+                                            {option.nom_sous_categorie}
+                                        </option>
+                                    ))}
+                                    <option value="newcategory">Ajouter une sous catégorie ...</option>
+                                </TextField>
                             </div>
-                        </ThemeProvider>
-                    </FormGroup>
-                </div>
-            </main>
-            <SimpleDialog selectedValue={selectedValue} open={open} onClose={handleClose} />
-        </>
-    );
+                            <hr />
+                            <div className='form-element'>
+                                <InputLabel className='label' htmlFor="nom_fournisseur">Fournisseur :</InputLabel>
+                                <TextField value={formValues.nom_fournisseur} onChange={handleChange} sx={textFieldStyle} name="nom_fournisseur" id="nom_fournisseur" ></TextField>
+                            </div>
+                            <hr />
+                            <div className='form-element'>
+                                <InputLabel className='label' htmlFor="montant">Prix :</InputLabel>
+                                <TextField value={formValues.montant} onChange={handleChange} type='number' sx={textFieldStyle} name="montant" id="montant" ></TextField>
+                            </div>
+                            <hr />
+                            <div className='form-element'>
+                                <InputLabel className='label' htmlFor="frequence_prelevement">Fréquence :</InputLabel>
+                                <TextField value={formValues.frequence_prelevement} onChange={handleChange}
+                                    color="secondary" focused
+                                    id="frequence_prelevement"
+                                    name='frequence_prelevement'
+                                    select
+                                    sx={textFieldStyle}
+                                    SelectProps={{
+                                        native: true,
+                                    }}
+                                >
+                                    <option value=""></option>
+                                    <option value="Hebdomadaire">Hebdomadaire</option>
+                                    <option value="Bimensuel">Bimensuel</option>
+                                    <option value="Mensuel">Mensuel</option>
+                                    <option value="Trimestriel">Trimestriel</option>
+                                    <option value="Annuel">Annuel</option>
+                                </TextField>
+                            </div>
+                            <hr />
+                            <div className='form-element'>
+                                <InputLabel className='label' htmlFor="date_echeance">Échéance :</InputLabel>
+                                <TextField type='date' value={formValues.date_echeance} onChange={handleChange} sx={textFieldStyle} name="date_echeance" id="date_echeance" ></TextField>
+                            </div>
+                            <hr />
+                            <div className='form-element'>
+                                <InputLabel className='label' htmlFor="IsEngagement">Engagement :</InputLabel>
+                                <Checkbox checked={formValues.IsEngagement} onChange={handleChange} name="IsEngagement" id="IsEngagement" />
+                                <TextField type='date' value={formValues.date_fin_engagement} disabled={!formValues.IsEngagement} onChange={handleChange} sx={textFieldStyle} name="date_fin_engagement" id="date_fin_engagement" ></TextField>
+                            </div>
+                            <hr />
+                            <div className='buttons'>
+                                <Button variant="contained" color='primary' onClick={handleFormSubmit}>Sauvegarder</Button>
+                                <Link to='/subslist'><Button variant="contained" color='error'>Annuler</Button></Link>
+                            </div>
+                        </div>
+                    </ThemeProvider>
+                </FormGroup>
+            </div>
+        </main>
+        <SimpleDialog selectedValue={selectedValue} open={open} onClose={handleClose} />
+    </>
+);
 }
 
 export default Addsub;

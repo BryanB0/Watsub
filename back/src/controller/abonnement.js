@@ -44,22 +44,10 @@ export class AbonnementController {
     date_echeance,
     date_fin_engagement,
     IsEngagement,
-    nom_categorie,
-    couleur_categorie,
-    nom_sous_categorie,
-    couleur_sous_categorie
+    categorieId,
+    souscategorieId
   ) {
     try {
-      // Vérifier si un abonnement avec le même nom existe déjà
-      const existingAbonnement = await connexion.executeQuery(
-        "SELECT 1 FROM abonnement WHERE nom_fournisseur = ? LIMIT 1",
-        [nom_fournisseur]
-      );
-
-      // Si un enregistrement est retourné, cela signifie que le nom_abonnement est déjà pris.
-      if (existingAbonnement.length > 0) {
-        throw new Error("Un fournisseur avec ce nom existe déjà.");
-      }
 
       const dateEcheanceObj = new Date(date_echeance);
       const dateFinEngagementObj = new Date(date_fin_engagement);
@@ -69,49 +57,8 @@ export class AbonnementController {
           "La date d'échéance doit être antérieure à la date de fin d'engagement."
         );
       }
+      
 
-      // Vérifier si la catégorie existe déjà par nom et couleur, sinon l'ajouter
-      const existingCategorieByNameAndColor = await connexion.executeQuery(
-        "SELECT id_categorie FROM categorie WHERE nom_categorie = ? AND couleur_categorie = ?",
-        [nom_categorie, couleur_categorie]
-      );
-
-      let categorieId;
-      if (existingCategorieByNameAndColor.length === 0) {
-        // La catégorie n'existe pas, nous devons l'insérer
-        const insertCategorieQuery =
-          "INSERT INTO categorie (nom_categorie, couleur_categorie) VALUES (?, ?)";
-        const insertCategorieResult = await connexion.executeQuery(
-          insertCategorieQuery,
-          [nom_categorie, couleur_categorie]
-        );
-        categorieId = insertCategorieResult.insertId;
-      } else {
-        // La catégorie existe, nous récupérons son id
-        categorieId = existingCategorieByNameAndColor[0].id_categorie;
-      }
-
-      let SousCategorieId;
-      // Vérifier si la catégorie existe déjà par nom et couleur, sinon l'ajouter
-      const existingSousCategorieByNameAndColor = await connexion.executeQuery(
-        "SELECT id_sous_categorie FROM sous_categorie WHERE nom_sous_categorie = ? AND couleur_sous_categorie = ?",
-        [nom_sous_categorie, couleur_sous_categorie]
-      );
-
-      if (existingSousCategorieByNameAndColor.length === 0) {
-        // La catégorie n'existe pas, nous devons l'insérer
-        const insertSousCategorieQuery =
-          "INSERT INTO sous_categorie (nom_sous_categorie, couleur_sous_categorie) VALUES (?, ?)";
-        const insertSousCategorieResult = await connexion.executeQuery(
-          insertSousCategorieQuery,
-          [nom_sous_categorie, couleur_sous_categorie]
-        );
-        SousCategorieId = insertSousCategorieResult.insertId;
-      } else {
-        // La catégorie existe, nous récupérons son id
-        SousCategorieId =
-          existingSousCategorieByNameAndColor[0].id_sous_categorie;
-      }
       // Définition de la requête SQL pour insérer un nouvel abonnement
       const query = `
         INSERT INTO abonnement (
@@ -136,7 +83,7 @@ export class AbonnementController {
         date_fin_engagement,
         IsEngagement ? "1" : "0",
         categorieId,
-        SousCategorieId,
+        souscategorieId
       ]);
     } catch (error) {
       // Renvoyer une nouvelle erreur avec le message personnalisé

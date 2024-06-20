@@ -38,6 +38,8 @@ function Register() {
 
     
         const handleFormSubmit = (e) => {
+            console.log(formValues);
+            console.log(updatedFormValues);
             e.preventDefault();
             fetch('http://localhost:3000/users/create_user', {
                 method: 'POST', 

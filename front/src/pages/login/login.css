@@ -64,3 +64,26 @@
     opacity: 1;
 
   }
+
+  @media (max-width :800px){
+    .login{
+        flex-direction: column;
+        margin: 0 2%;
+
+    }
+    .login p{
+        font-size:1.5em
+    }
+    .login .left, 
+    .login .right {
+        width: 100%;
+    }
+
+    .login .left {
+        border-right: none;
+    }
+    
+    .login .right {
+        border-left: none;
+    }
+  }

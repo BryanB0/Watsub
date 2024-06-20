@@ -1,4 +1,3 @@
-// src/controller/user.js
 import mysql from "mysql";
 
 import {
