@@ -88,21 +88,21 @@ async getAllUsers() {
     throw new Error("La validation de l'email a échoué.");
   }
 async insertUser(
-    nom,
-    prenom,
+  prenom,
+  nom,
     telephone,
-    salaire,
     mail,
+    salaire,
     motdepasse,
     ismailverif
   ) {
     try {
       console.log("Paramètres reçus:", {
-        nom,
         prenom,
+        nom,
         telephone,
-        salaire,
         mail,
+        salaire,
         motdepasse,
         ismailverif,
       });
@@ -129,7 +129,7 @@ async insertUser(
       }
       // Définition de la requête SQL pour insérer un nouvel utilisateur
       const query = `
-      INSERT INTO utilisateur (nom, prenom, telephone, salaire, mail, motdepasse, ismailverif)
+      INSERT INTO utilisateur (prenom, nom, telephone, mail, salaire, motdepasse, ismailverif)
       VALUES (?, ?, ?, ?, ?, ?, ?)
       `;
 
@@ -140,7 +140,6 @@ async insertUser(
         telephone,
         salaire,
         mail,
-        // hashedPassword,
         motdepasse,
         ismailverif ? "1" : "0",
       ]);
@@ -151,9 +150,8 @@ async insertUser(
         telephone,
         salaire,
         mail,
-        // hashedPassword,
         motdepasse,
-        ismailverif ? "1" : "0", // Convertir la valeur booléenne en 0 ou 1
+        ismailverif ? "1" : "0",
       ]);
 
       // Envoyer un email de vérification après l'insertion réussie

@@ -40,11 +40,12 @@ router.get("/get_all_users",controller.isAuthenticated, async (req, res) => {
 
 // Route pour créer un nouvel utilisateur.
 router.post("/create_user", async (req, res) => {
+  console.log('passage route');
   try {
     console.log("Début de la création de l'utilisateur");
 
     // Extraction des donnés du corps de la requête.
-    const { nom, prenom, telephone, salaire, mail, motdepasse, ismailverif } =
+    const { prenom, nom, telephone, salaire, mail, motdepasse, ismailverif } =
       req.body;
     // Vérification que le champ mail est une chaîne de caractères et qu'il contient un '@' et un '.'
     if (
@@ -113,8 +114,8 @@ router.post("/create_user", async (req, res) => {
 
     // Appel de la méthode du contrôleur pour insérer un nouvel utilisateur.
     await controller.insertUser(
-      nom,
       prenom,
+      nom,
       telephone,
       salaire,
       mail,

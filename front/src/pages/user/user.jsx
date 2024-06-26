@@ -70,7 +70,7 @@ function User() {
                 <hr />
                 <div className='form-element'>
                   <InputLabel className='label' htmlFor="last_name">Nom :</InputLabel>
-                  <Input value={formValues.last_name} onChange={handleChange} fullWidth type="text" name="last_name" id="last_name" placeholder='Sins' disableUnderline={true} />
+                  <Input value={formValues.last_name} onChange={handleChange} fullWidth type="text" name="last_name" id="last_name" placeholder='Martin' disableUnderline={true} />
                 </div>
                 <hr />
                 <div className='form-element'>
@@ -81,7 +81,7 @@ function User() {
                 <hr />
                 <div className='form-element'>
                   <InputLabel className='label' htmlFor="email">Email :</InputLabel>
-                  <Input value={formValues.email} onChange={handleChange} fullWidth type="email" name="email" id="email" placeholder='johnnysisns@john.com' disableUnderline={true} />
+                  <Input value={formValues.email} onChange={handleChange} fullWidth type="email" name="email" id="email" placeholder='johnnymartin@mail.com' disableUnderline={true} />
                 </div>
                 <hr />
                 <div className='form-element'>

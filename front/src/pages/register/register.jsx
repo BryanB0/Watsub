@@ -22,7 +22,7 @@ const inputTheme = {
 function Register() {
 
     const [formValues, setFormValues] = useState({
-        nom: '', prenom: '', telephone: '', salaire: '', mail: '', motdepasse: ''
+        nom: '', prenom: '', telephone: '', salaire: '', mail: '', motdepasse: '', ismailverif: false
     });
     
     const salaireInt = parseInt(formValues.salaire, 10);
@@ -87,7 +87,7 @@ function Register() {
                                     <hr />
                                     <div className='form-element'>
                                         <InputLabel className='label' htmlFor="nom">Nom :</InputLabel>
-                                        <Input value={formValues.nom} onChange={handleChange} fullWidth type="text" name="nom" id="nom" placeholder='Sins' disableUnderline={true} />
+                                        <Input value={formValues.nom} onChange={handleChange} fullWidth type="text" name="nom" id="nom" placeholder='Martin' disableUnderline={true} />
                                     </div>
                                     <hr />
                                     <div className='form-element'>
@@ -102,7 +102,7 @@ function Register() {
                                     <hr />
                                     <div className='form-element'>
                                         <InputLabel className='label' htmlFor="mail">Email* :</InputLabel>
-                                        <Input value={formValues.mail} onChange={handleChange} fullWidth type="mail" name="mail" id="mail" placeholder='johnnysisns@john.com' disableUnderline={true} />
+                                        <Input value={formValues.mail} onChange={handleChange} fullWidth type="mail" name="mail" id="mail" placeholder='johnnymartin@mail.com' disableUnderline={true} />
                                     </div>
                                     <hr />
                                     <div className='form-element'>
