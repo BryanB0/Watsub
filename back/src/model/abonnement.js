@@ -7,7 +7,8 @@ export class Abonnement {
     date_echeance,
     date_fin_engagement,
     isEngagement,
-    id_categorie
+    id_categorie,
+    id_sous_categorie
   ) {
     this.nom_abonnement = nom_abonnement;
     this.nom_fournisseur = nom_fournisseur;
@@ -17,5 +18,6 @@ export class Abonnement {
     this.date_fin_engagement = date_fin_engagement;
     this.isEngagement = isEngagement;
     this.id_categorie = id_categorie;
+    this.id_sous_categorie = id_sous_categorie;
   }
 }

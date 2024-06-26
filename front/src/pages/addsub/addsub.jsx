@@ -123,7 +123,7 @@ function Addsub() {
     const [selectedSubcategoryColor, setSelectedSubcategoryColor] = useState('#ffffff80');
     const [formValues, setFormValues] = useState({
         id_categorie: '',
-        id_sous_categorie: '',
+        id_sous_categorie:'',
         nom_fournisseur: '',
         montant: '',
         frequence_prelevement: '',
@@ -159,7 +159,7 @@ function Addsub() {
     const montantInt = parseInt(formValues.montant, 10);
     const id_categorieInt = parseInt(formValues.id_categorie, 10);
     const id_sous_categorieInt = parseInt(formValues.id_sous_categorie, 10);
-    const updatedFormValues = { ...formValues, montant: montantInt, id_categorie: id_categorieInt, id_sous_categorie : id_sous_categorieInt };
+    const updatedFormValues = { ...formValues, montant: montantInt, id_categorie: id_categorieInt, id_sous_categorie : id_sous_categorieInt ?  id_sous_categorieInt : null};
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;

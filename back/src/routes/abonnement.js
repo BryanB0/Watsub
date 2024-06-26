@@ -39,8 +39,6 @@ router.post(
         IsEngagement,
         id_categorie,
         id_sous_categorie,
-        nom_sous_categorie,
-        couleur_sous_categorie,
       } = req.body;
 
       if (!nom_fournisseur || typeof nom_fournisseur !== "string") {
@@ -116,13 +114,6 @@ if (!id_categorie || typeof id_categorie !== "number") {
         });
       }
 
-      if (!id_sous_categorie || typeof id_sous_categorie !== "number") {
-        return res.status(400).json({
-          success: false,
-          message: "L'ID de sous catégorie est requis et doit être un nombre.",
-        });
-      }
-
       await controller.insertAbonnement(
         nom_fournisseur,
         montant,
@@ -136,8 +127,6 @@ if (!id_categorie || typeof id_categorie !== "number") {
         IsEngagement,
         id_categorie,
         id_sous_categorie,
-        nom_sous_categorie,
-        couleur_sous_categorie
       );
 
       res
