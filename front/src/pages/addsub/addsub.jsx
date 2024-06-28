@@ -1,4 +1,4 @@
-import { Button, Checkbox, Dialog, DialogTitle, FormGroup, InputLabel, List, ListItem, TextField, ThemeProvider, createTheme } from '@mui/material';
+import { Button, Checkbox, Chip, Dialog, DialogTitle, FormGroup, InputLabel, List, ListItem, TextField, ThemeProvider, createTheme } from '@mui/material';
 import './addsub.css';
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
@@ -56,7 +56,9 @@ function SimpleDialog(props) {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
+            if (data.success === true) {
+                console.log("subcategory created")
+            } else console.log("created subcategory failed")
         })
         .catch((error) => {
             console.error(error);
@@ -133,6 +135,8 @@ function Addsub() {
     });
     const [open, setOpen] = useState(false);
     const [selectedValue, setSelectedValue] = useState();
+    const [errorMessage, setErrorMessage] = useState();
+    const [validationMessage, setvalidationMessage] = useState();
 
     useEffect(() => {
         fetch('http://localhost:3000/categorie/get_all_categorie')
@@ -189,7 +193,11 @@ function Addsub() {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
+            if (data.success === true) {
+                setvalidationMessage(data.message) 
+            } else {
+                setErrorMessage(data.message)
+            }
         })
         .catch((error) => {
             console.error(error);
@@ -220,6 +228,7 @@ function Addsub() {
                     <FormGroup className='form'>
                         <ThemeProvider theme={theme}>
                             <div className='form-elements'>
+                    <div className='validationMessage'>{validationMessage}</div>
                                 <div className='form-element'>
                                     <InputLabel className='label' htmlFor="id_categorie">Catégorie :</InputLabel>
                                     <TextField value={formValues.id_categorie} onChange={handleChange}
@@ -319,6 +328,7 @@ function Addsub() {
                                 <TextField type='date' value={formValues.date_fin_engagement} disabled={!formValues.IsEngagement} onChange={handleChange} sx={textFieldStyle} name="date_fin_engagement" id="date_fin_engagement" ></TextField>
                             </div>
                             <hr />
+                            <div className='error'>{errorMessage}</div>
                             <div className='buttons'>
                                 <Button variant="contained" color='primary' onClick={handleFormSubmit}>Sauvegarder</Button>
                                 <Link to='/subslist'><Button variant="contained" color='error'>Annuler</Button></Link>

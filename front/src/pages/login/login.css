@@ -60,6 +60,12 @@
     width: 60%;
 }
 
+.login .error {
+    color: #FF9F9F;
+    font-size: 1.2em;
+    margin-bottom: 3%;
+}
+
 .login input::placeholder {
     opacity: 1;
 

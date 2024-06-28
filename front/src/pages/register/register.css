@@ -91,6 +91,12 @@
     opacity: 0.5;
   }
 
+  .register .error {
+    color: #FF9F9F;
+    font-size: 1.2em;
+    margin-bottom: 3%;
+}
+
   @media (max-width :800px){
     .register{
         flex-direction: column;

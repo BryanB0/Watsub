@@ -87,12 +87,13 @@ async getAllUsers() {
     console.error("Validation de l'email échouée:", error.message);
     throw new Error("La validation de l'email a échoué.");
   }
-async insertUser(
-  prenom,
-  nom,
+  
+  async insertUser(
+    prenom,
+    nom,
     telephone,
-    mail,
     salaire,
+    mail,
     motdepasse,
     ismailverif
   ) {
@@ -101,8 +102,8 @@ async insertUser(
         prenom,
         nom,
         telephone,
-        mail,
         salaire,
+        mail,
         motdepasse,
         ismailverif,
       });
@@ -117,8 +118,8 @@ async insertUser(
         throw new Error("An account with this email already exists.");
       }
 
-      await connexion.validateEmail(mail);
-      await connexion.validatePassword(motdepasse);
+      await this.validateEmail(mail);
+      await this.validatePassword(motdepasse);
 
       // const hashedPassword = await bcrypt.hash(motdepasse, HASH_SALT_ROUNDS);
       // console.log("Mot de passe haché:", hashedPassword);
@@ -129,14 +130,14 @@ async insertUser(
       }
       // Définition de la requête SQL pour insérer un nouvel utilisateur
       const query = `
-      INSERT INTO utilisateur (prenom, nom, telephone, mail, salaire, motdepasse, ismailverif)
+      INSERT INTO utilisateur (prenom, nom, telephone, salaire, mail, motdepasse, ismailverif)
       VALUES (?, ?, ?, ?, ?, ?, ?)
       `;
 
       console.log("Requête SQL:", query);
       console.log("Valeurs:", [
-        nom,
         prenom,
+        nom,
         telephone,
         salaire,
         mail,
@@ -145,13 +146,13 @@ async insertUser(
       ]);
 
       await connexion.executeQuery(query, [
-        nom,
         prenom,
+        nom,
         telephone,
         salaire,
         mail,
         motdepasse,
-        ismailverif ? "1" : "0",
+        ismailverif ? "1" : "0", // Convertir la valeur booléenne en 0 ou 1
       ]);
 
       // Envoyer un email de vérification après l'insertion réussie

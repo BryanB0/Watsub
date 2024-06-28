@@ -26,7 +26,7 @@ router.use(bodyParser.json());
 // router.use(requireAuth); // Protéger toutes les routes de ce routeur
 
 // Route pour récupérer tous les utilisateurs.
-router.get("/get_all_users",controller.isAuthenticated, async (req, res) => {
+router.get("/get_all_users", async (req, res) => {
   try {
     // Appel de la méthode du contrôleur pour récupérer tout les utilisateurs
     const results = await controller.getAllUsers();
@@ -40,7 +40,6 @@ router.get("/get_all_users",controller.isAuthenticated, async (req, res) => {
 
 // Route pour créer un nouvel utilisateur.
 router.post("/create_user", async (req, res) => {
-  console.log('passage route');
   try {
     console.log("Début de la création de l'utilisateur");
 
@@ -60,7 +59,8 @@ router.post("/create_user", async (req, res) => {
           "Le mail de l'utilisateur est requis, doit être une chaîne de caractères et contenir un '@' et un '.'.",
       });
     }
-// Vérification que le mot de passe est une chaîne de caractères et respecte les critères de complexité
+
+    // Vérification que le mot de passe est une chaîne de caractères et respecte les critères de complexité
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/;
     if (
       !motdepasse ||
@@ -74,19 +74,19 @@ router.post("/create_user", async (req, res) => {
       });
     }
 
-    // Vérification des paramètres facultatifs
-    if (nom && typeof nom !== "string") {
-      return res.status(400).json({
-        success: false,
-        message: "Le nom de l'utilisateur doit être une chaîne de caractères.",
-      });
-    }
-
     if (prenom && typeof prenom !== "string") {
       return res.status(400).json({
         success: false,
         message:
           "Le prénom de l'utilisateur doit être une chaîne de caractères.",
+      });
+    }
+
+    // Vérification des paramètres facultatifs
+    if (nom && typeof nom !== "string") {
+      return res.status(400).json({
+        success: false,
+        message: "Le nom de l'utilisateur doit être une chaîne de caractères.",
       });
     }
 
@@ -125,7 +125,7 @@ router.post("/create_user", async (req, res) => {
     // Réponse réussie si tout se passe bien.
     res
       .status(200)
-      .json({ success: true, message: "Utilisateur créé avec succès." });
+      .json({ success: true, message: "L'utilisateur créé avec succès." });
     console.log("Utilisateur créé avec succès");
   } catch (error) {
     // En cas d'erreur, loggez l'erreur et envoyez une réponse d'erreur au client
@@ -136,7 +136,6 @@ router.post("/create_user", async (req, res) => {
     });
   }
 });
-
 // Route pour supprimer un utilisateur
 router.delete("/delete_user",controller.isAuthenticated, async (req, res) => {
   try {

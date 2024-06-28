@@ -3,6 +3,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import session from "express-session";
 import cors from "cors";
+const app = express();
 
 import { router as userRouter } from "./routes/user.js"; // Assurez-vous que le chemin est correct
 import { router as abonnementRouter } from "./routes/abonnement.js"; // Importez le routeur d'abonnement
@@ -12,7 +13,6 @@ import { router as sousCategorieRouter } from "./routes/sous_categorie.js"; // I
 
 import "dotenv/config"; // Cela va charger les variables d'environnement
 
-const app = express();
 const PORT = process.env.WHATSUB_PORT || 3000;
 
 // Configuration de la session

@@ -16,6 +16,8 @@ const theme = createTheme({
 
 function Login() {
 
+const [errorMessage, setErrorMessage] = useState('');
+
     const [formValues, setFormValues] = useState({
         mail: '', motdepasse: ''
     })
@@ -26,7 +28,6 @@ function Login() {
     }
 
     const handleFormSubmit = (e) => {
-
         e.preventDefault();
         fetch('http://localhost:3000/users/login', {
             method: 'POST',
@@ -35,9 +36,13 @@ function Login() {
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data);
+                if (data.success === true) {
+                    navigate('/')
+                } else {
+                    setErrorMessage(data.message)
+                }
             })
-            .then(navigate('/'))
+                
             .catch((error) => {
                 console.error(error);
             });
@@ -97,6 +102,7 @@ function Login() {
                                             </InputAdornment>
                                         }
                                     />
+                                    <div className='error'>{errorMessage}</div>
                                     <Button variant="contained" color='primary' type="submit" onClick={handleFormSubmit}>Se connecter</Button>
                                 </FormGroup>
                                 <Link to='/register'><Button variant="contained" color='primary'>S'inscrire</Button></Link>

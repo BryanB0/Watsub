@@ -27,35 +27,41 @@ function Register() {
     
     const salaireInt = parseInt(formValues.salaire, 10);
     const updatedFormValues = { ...formValues, salaire: salaireInt };
-
+    
     
     const handleChange = (e) => {
         setFormValues(prev => ({ ...prev, [e.target.name]: e.target.value }
         ));
         
     }
-     const navigate = useNavigate();
-
+    const navigate = useNavigate();
     
-        const handleFormSubmit = (e) => {
-            console.log(formValues);
-            console.log(updatedFormValues);
-            e.preventDefault();
-            fetch('http://localhost:3000/users/create_user', {
-                method: 'POST', 
-                body: JSON.stringify(updatedFormValues),
-                headers: { 'Content-Type': 'application/json' }
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-            })
-            //.then(navigate('/login'))
-            .catch((error) => {
-                console.error(error);
+    const [errorMessage, setErrorMessage] = useState();
+    
+    
+    const handleFormSubmit = (e) => {
+        console.log(formValues);
+        console.log(updatedFormValues);
+        e.preventDefault();
+        fetch('http://localhost:3000/users/create_user', {
+            method: 'POST', 
+            body: JSON.stringify(updatedFormValues),
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success === true) {
+                navigate('/login')
+                console.log("account created")
+            } else {
+                setErrorMessage(data.message)
+            }
+        })
+        .catch((error) => {
+            console.error(error);
             });
         }
-
+        
         const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -123,7 +129,8 @@ function Register() {
                                         />
                                     </div>
                                 </div>
-                                <Button variant="contained" color='primary' className='submit' type="submit" onClick={handleFormSubmit}>Se connecter</Button>
+                                <div className='error'>{errorMessage}</div>
+                                <Button variant="contained" color='primary' className='submit' type="submit" onClick={handleFormSubmit}>S'inscrire</Button>
                                 <Link to='/login' ><Button variant="contained" color='error'>Annuler</Button></Link>
                             </ThemeProvider>
                         </FormGroup>

@@ -18,6 +18,7 @@
 .addsub .buttons{
 display: flex;
 justify-content: space-around;
+
 }
 .addsub button {
     font-size: 1.5em;
@@ -92,3 +93,18 @@ justify-content: space-around;
   .addsubdialog .colorPicker{
     width: 100%;
   }
+
+  .addsub .error {
+    color: #FF9F9F;
+    font-size: 1.2em;
+    text-align: center;
+    
+}
+
+.addsub .validationMessage {
+  font-size: 1.2em;
+    color: #55D9C0;
+    text-align: center;
+}
+
+
